@@ -51,6 +51,15 @@
   }
   .sub{font-size:14px;color:var(--muted);margin:.6rem 0 0;max-width:64ch;line-height:1.5;}
   .stats{display:flex;gap:18px;margin-top:1rem;flex-wrap:wrap;}
+  .qr-share{
+    display:flex;align-items:center;gap:14px;margin-top:1.1rem;
+    padding:12px 14px;background:var(--card);border:1px solid var(--line);
+    border-radius:8px;max-width:420px;
+  }
+  .qr-share img{border-radius:4px;flex:0 0 auto;background:#fff;padding:4px;}
+  .qr-share-text{display:flex;flex-direction:column;gap:2px;}
+  .qr-share-text strong{font-size:14px;color:var(--ink);}
+  .qr-share-text span{font-size:12.5px;color:var(--muted);line-height:1.4;}
   .stat{font-size:12px;color:var(--muted);}
   .stat b{color:var(--ink);font-size:15px;font-weight:600;}
 
@@ -168,6 +177,13 @@
     <div class="stats">
       <span class="stat"><b id="statEvents">0</b> eventi in agenda</span>
       <span class="stat"><b id="statVenues">0</b> posti mappati</span>
+    </div>
+    <div class="qr-share">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKCAIAAAD0S4FSAAAGQUlEQVR4nO3dO25kNxBAUcvwNsaB97+mCTyLUCTIqSMCEodgvdvnpEJ/1N0XTArFt8+P9z+Aoj9vvwHgFHlDlrwhS96QJW/IkjdkyRuy5A1Z8oYseUOWvCFL3pAlb8iSN2TJG7LkDVnyhix5Q5a8IeuvnQf/+Puf3/U+hvj178/FX9f/77nH7jj3ujvf/q3/94l2PiunN2TJG7LkDVnyhix5Q5a8IUvekCVvyJI3ZG1Nra2dm0zacW6qaeYz35pL23nmc7+cV/tNOr0hS96QJW/IkjdkyRuy5A1Z8oYseUOWvCHr4NTa2rlJnZmTSTub2M45Nw+388wz99LtuPWbdHpDlrwhS96QJW/IkjdkyRuy5A1Z8oYseUPWtam1J5q5A6w38cbv4vSGLHlDlrwhS96QJW/IkjdkyRuy5A1Z8oYsU2tfsLMD7NYer3Pveeext7apvRqnN2TJG7LkDVnyhix5Q5a8IUvekCVvyJI3ZF2bWnviZNK5ubSZW9xuPfaWJ77nNac3ZMkbsuQNWfKGLHlDlrwhS96QJW/IkjdkHZxau3Vz5Tm3dq3N3Jc287Frvd/kmtMbsuQNWfKGLHlDlrwhS96QJW/IkjdkyRuytqbWerup1np3gN5y67N6NU5vyJI3ZMkbsuQNWfKGLHlDlrwhS96QJW/I2ppasxPr/279vzP3lp2bHpv5H82cw3N6Q5a8IUvekCVvyJI3ZMkbsuQNWfKGLHlD1tvnx/u3H/xq28VuzdLNnJeaOae1dms6cOeZdzi9IUvekCVvyJI3ZMkbsuQNWfKGLHlDlrwha2vX2o6ZG8LWbk1x7dh5zzPn4Z54B+it9+z0hix5Q5a8IUvekCVvyJI3ZMkbsuQNWfKGrK1da2u37lt84t2UM193beZk4drMX925T9LpDVnyhix5Q5a8IUvekCVvyJI3ZMkbsuQNWQdvCJ15z+MtT9wudmsubeYuvXNMrQFfJm/IkjdkyRuy5A1Z8oYseUOWvCFL3pC1dUPozLsae9NUO2beiDrzk3ziNOSa0xuy5A1Z8oYseUOWvCFL3pAlb8iSN2TJG7K2ptZu3QG6dmtOa2cS64mb2NZufftrM29xPfdpOL0hS96QJW/IkjdkyRuy5A1Z8oYseUOWvCHr4K61mbu4zr3nmXNLMzfP9X45Mzm9IUvekCVvyJI3ZMkbsuQNWfKGLHlDlrwh6+3z4/3bD37idNGtx55z61tYm7lNrfftrzm9IUvekCVvyJI3ZMkbsuQNWfKGLHlDlrwha2vX2kwzJ5NuzTz1JrF23JppWzv3OTu9IUvekCVvyJI3ZMkbsuQNWfKGLHlDlrwh65FTazOnx85tF7s1W7bzuk+cDnzie15zekOWvCFL3pAlb8iSN2TJG7LkDVnyhix5Q9a1G0JvObcx69zr9qapdsz8jnae+RynN2TJG7LkDVnyhix5Q5a8IUvekCVvyJI3ZD1y19razNmjW7dPrt2alps57zjzc97h9IYseUOWvCFL3pAlb8iSN2TJG7LkDVnyhqytXWuv5taWr7Unvqtb2+PWnrhNbc3pDVnyhix5Q5a8IUvekCVvyJI3ZMkbsuQNWVu71mZuzNqxM3v0xMmzndeduWtt5q2mtzi9IUvekCVvyJI3ZMkbsuQNWfKGLHlDlrwh6+ANoTMnhG7NS+144m2bt5z71d2aStx5Xac3ZMkbsuQNWfKGLHlDlrwhS96QJW/IkjdkHZxaW5t5r+VMM+fhbn3Ot6b0zn0a5z5JpzdkyRuy5A1Z8oYseUOWvCFL3pAlb8iSN2Rdm1rrOTd7NPMuznN6c4e3pgOd3pAlb8iSN2TJG7LkDVnyhix5Q5a8IUvekGVq7QvOzR7NnEs7955vTXGdu6lz5nSg0xuy5A1Z8oYseUOWvCFL3pAlb8iSN2TJG7KuTa319mmt7Uw1zbxNdeZM29qrTbw5vSFL3pAlb8iSN2TJG7LkDVnyhix5Q5a8Ievt8+P92w+euV9qx60dYDtmzrTtmLlrbW3mFKbTG7LkDVnyhix5Q5a8IUvekCVvyJI3ZMkbsram1oDJnN6QJW/IkjdkyRuy5A1Z8oYseUOWvCFL3pAlb8iSN2TJG7LkDVnyhix5Q5a8IUvekCVvyJI3ZP0Hzx1CHFArRQ8AAAAASUVORK5CYII=" alt="QR code per scaricare l'app" width="110" height="110">
+      <div class="qr-share-text">
+        <strong>Condividi l'app</strong>
+        <span>Inquadra con la fotocamera per aprirla sul telefono</span>
+      </div>
     </div>
   </header>
 
@@ -291,6 +307,8 @@ const VENUE_CATALOG = {
     {name:"Villa Necchi Campiglio", auto:true},
     {name:"Cinema in tutta Milano", auto:true},
     {name:"Salone14 @ YellowSquare", auto:true},
+    {name:"Chapel @ YellowSquare", auto:false},
+    {name:"Osteria Democratica", auto:false},
     {name:"Municipi 5, 6 e 7 (vari quartieri)", auto:true},
     {name:"Certosa di Garegnano", auto:true},
     {name:"Fondazione Memoriale della Shoah di Milano", auto:true},
