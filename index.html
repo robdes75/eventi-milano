@@ -60,6 +60,22 @@
   .qr-share-text{display:flex;flex-direction:column;gap:2px;}
   .qr-share-text strong{font-size:14px;color:var(--ink);}
   .qr-share-text span{font-size:12.5px;color:var(--muted);line-height:1.4;}
+  .install-banner{
+    display:none;align-items:flex-start;gap:12px;margin-top:1rem;
+    padding:14px 16px;background:var(--teal-deep);color:#fff;
+    border-radius:8px;max-width:520px;
+  }
+  .install-banner.show{display:flex;}
+  .install-banner .ib-icon{font-size:22px;line-height:1;}
+  .install-banner .ib-text{flex:1;font-size:13.5px;line-height:1.5;}
+  .install-banner .ib-text strong{display:block;font-size:14.5px;margin-bottom:3px;}
+  .install-banner button{
+    background:var(--ochre);color:#1c1b19;border:none;border-radius:6px;
+    padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;
+  }
+  .install-banner .ib-close{
+    background:transparent;color:#fff;font-size:18px;padding:0 4px;font-weight:400;
+  }
   .stat{font-size:12px;color:var(--muted);}
   .stat b{color:var(--ink);font-size:15px;font-weight:600;}
 
@@ -184,6 +200,12 @@
         <strong>Condividi l'app</strong>
         <span>Inquadra con la fotocamera per aprirla sul telefono</span>
       </div>
+    </div>
+    <div class="install-banner" id="installBanner">
+      <span class="ib-icon">📲</span>
+      <div class="ib-text" id="installText"></div>
+      <button id="installAction" style="display:none;">Installa</button>
+      <button class="ib-close" id="installClose" title="Chiudi">✕</button>
     </div>
   </header>
 
@@ -635,13 +657,6 @@ const SEED_EVENTS = [
   {name:"Zelig — Prove TV", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-28", time:"", desc:"Serata laboratorio d'autore.", link:"https://www.areazelig.it/"},
   {name:"Presentazione Fringe Festival", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-29", time:"", desc:"", link:"https://www.areazelig.it/"},
   {name:"Tre sedie (ovvero la scenografia di...)", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-01", time:"", desc:"Fino al 2 ottobre.", link:"https://www.areazelig.it/"},
-  {name:"Laboratorio Zelig", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-02", time:"", desc:"Piattaforma di prova con i comici del cast e nuove leve. Fino al 4 ottobre.", link:"https://www.areazelig.it/"},
-  {name:"Stand-up Comedy Night", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-09", time:"", desc:"Rassegna con i migliori comedian della scena italiana. Fino al 11 ottobre.", link:"https://www.areazelig.it/"},
-  {name:"Pino e gli I.A.nticorpi", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-15", time:"", desc:"", link:"https://www.areazelig.it/"},
-  {name:"Federico Basso — Non faccio il bis", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-16", time:"", desc:"", link:"https://www.areazelig.it/"},
-  {name:"Max Angioni — provini e nuovi testi", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-16", time:"", desc:"Fino al 18 ottobre.", link:"https://www.areazelig.it/"},
-  {name:"Vincenzo Comunale — solo show", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-23", time:"", desc:"Fino al 25 ottobre.", link:"https://www.areazelig.it/"},
-  {name:"Zelig Open Mic", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-30", time:"", desc:"Serata aperta ad emergenti presentata dai comici storici. Fino al 1 novembre.", link:"https://www.areazelig.it/"},
   {name:"KAMIKAZE", type:"teatro", venue:"Campo Teatrale", date:"2026-10-22", time:"", desc:"La Corte Ospitale. Fino al 25 ottobre.", link:"https://www.campoteatrale.it/"},
   {name:"Noir", type:"teatro", venue:"Campo Teatrale", date:"2026-11-07", time:"", desc:"Fino al 22 novembre.", link:"https://www.campoteatrale.it/"},
   {name:"Green Days", type:"teatro", venue:"Campo Teatrale", date:"2026-11-24", time:"", desc:"Fino al 29 novembre.", link:"https://www.campoteatrale.it/"},
@@ -839,10 +854,6 @@ const SEED_EVENTS = [
   {name:"Un Milanese a Milano — Walter Valdi", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-17", time:"", desc:"", link:"https://www.areazelig.it/"},
   {name:"Zelig — Prove TV", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-18", time:"", desc:"", link:"https://www.areazelig.it/"},
   {name:"Teatribù", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-19", time:"", desc:"", link:"https://www.areazelig.it/"},
-  {name:"Pali e Dispari", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-13", time:"", desc:"", link:"https://www.areazelig.it/"},
-  {name:"Pali e Dispari", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-14", time:"", desc:"Replica.", link:"https://www.areazelig.it/"},
-  {name:"Le Scemette", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-19", time:"", desc:"", link:"https://www.areazelig.it/"},
-  {name:"Max Pisu", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-20", time:"", desc:"", link:"https://www.areazelig.it/"},
   {name:"Andrea Perroni — Meglio dal vivo", type:"teatro", venue:"Arena Milano Est", date:"2026-08-27", time:"21:00", desc:"", link:"https://pleasestandup.it/citta/lombardia/"},
   {name:"Pota Boyz — Comedy", type:"teatro", venue:"Arena Milano Est", date:"2026-08-28", time:"21:00", desc:"", link:"https://pleasestandup.it/citta/lombardia/"},
   {name:"Paolo Ruffini — Din Don Down", type:"teatro", venue:"Mind Live Theatre", date:"2026-09-20", time:"20:30", desc:"", link:"https://pleasestandup.it/citta/lombardia/"},
@@ -1623,7 +1634,48 @@ const SEED_EVENTS = [
   {name:"Silkray Duo", type:"locale", venue:"Après-coup", date:"2026-09-12", time:"", desc:"Il duo formato dal cantante e pianista Gennaro Bianchi e dal batterista Daniele Cataldo propone una rilettura vivace del repertorio jazz, soul e blues. Ingresso gratuito.", link:"https://www.apres-coup.it/calendario/"},
   {name:"Samantha Iorio Trio", type:"locale", venue:"Après-coup", date:"2026-09-19", time:"", desc:"La vocalist ha collaborato con Mario Biondi, Incognito, Burt Bacharach, Al Jarreau, Jeff Cascaro, Alain Clark e Pino Daniele. Ingresso gratuito.", link:"https://www.apres-coup.it/calendario/"},
   {name:"Chopin, Notturno Op. 27 n.2 — Emanuele Ferrari", type:"locale", venue:"Après-coup", date:"2026-09-24", time:"", desc:"Spettacolo che unisce concerto pianistico, conferenza musicologica e dramma teatrale in un solo interprete. €10.", link:"https://www.apres-coup.it/calendario/"},
-  {name:"Gianluca De Palo Band", type:"locale", venue:"Après-coup", date:"2026-09-26", time:"", desc:"Formazione blues italiana guidata dal chitarrista e cantante milanese, attiva nel circuito live tra Italia ed Europa. Ingresso gratuito.", link:"https://www.apres-coup.it/calendario/"}
+  {name:"Gianluca De Palo Band", type:"locale", venue:"Après-coup", date:"2026-09-26", time:"", desc:"Formazione blues italiana guidata dal chitarrista e cantante milanese, attiva nel circuito live tra Italia ed Europa. Ingresso gratuito.", link:"https://www.apres-coup.it/calendario/"},
+  {name:"Teatribù", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-20", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig — Prove TV", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-21", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Michele Basile — Stai Karma, Area Zelig special edition", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-22", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig — Prove TV", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-23", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Le Scemette", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-24", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig — Prove TV", type:"teatro", venue:"Zelig Cabaret", date:"2026-09-30", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Tre sedie, ovvero la scenografia — di Alessandro Fullin", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-02", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"La Cesira & friends — special guest Valeria Graci", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-03", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Leonardo Manera — Sincero", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-06", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Cinzia Marseglia presenta MBAA — la Puglia comica a Milano", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-07", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig — Prove TV", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-08", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Freaks & Comedy", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-09", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Gigi Rock — Meraviglioso", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-13", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Bar Spot", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-14", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig — Prove TV", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-15", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Pota Boyz — Comedy Show", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-16", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Teatribù", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-17", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Paolo Cevoli Show", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-19", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Raul Cremona Live Show", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-20", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Tits Up!", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-21", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig — Prove TV", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-23", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Collettivo Margaret Show", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-24", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Dado — Il ripetente", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-26", time:"", desc:"In scena anche il 27 ottobre.", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig Lab — il laboratorio artistico di Area Zelig", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-28", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Scomedy", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-29", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig Open Mic — English Version", type:"teatro", venue:"Zelig Cabaret", date:"2026-10-30", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"PanPers Show", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-03", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig Lab — il laboratorio artistico di Area Zelig", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-04", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Cinzia Marseglia presenta MBAA — la Puglia comica a Milano", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-05", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Freaks & Comedy", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-06", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Sergio Sgrilli Show", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-10", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Zelig Lab — il laboratorio artistico di Area Zelig", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-11", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Le Scemette", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-12", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Puppy Boys", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-13", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Teatribù", type:"teatro", venue:"Zelig Cabaret", date:"2026-11-14", time:"", desc:"", link:"https://www.milanopocket.it/eventi-milano/zelig-milano-programmazione-2026/"},
+  {name:"Angelo Duro — Chiedo scusa a tutti", type:"teatro", venue:"Teatro degli Arcimboldi", date:"2027-05-31", time:"", desc:"Il nuovo tour teatrale del comico palermitano, biglietti in vendita dal 7 settembre 2026.", link:"https://www.milanopocket.it/eventi-milano/angelo-duro-milano-2027/"},
+  {name:"We Are Young — 2010s Party", type:"locale", venue:"Alcatraz", date:"2026-10-03", time:"", desc:"Serata Club Alcatraz a tema anni 2010.", link:"https://alcatrazmilano.it/calendario/"},
+  {name:"PierC", type:"locale", venue:"Santeria Toscana 31", date:"2026-10-02", time:"", desc:"Dopo la finale a X Factor 2025, primo concerto da solista, prodotto da A1 Concerti.", link:"https://www.santeria.milano.it/eventi/"},
+  {name:"Paola Turci — Amore a dismisura", type:"locale", venue:"Santeria Toscana 31", date:"2026-11-29", time:"", desc:"Presenta il nuovo album, primo disco in sette anni, insieme ai brani di oltre quarant'anni di carriera.", link:"https://www.santeria.milano.it/eventi/"},
+  {name:"MURDA — Uzay Tour", type:"locale", venue:"Santeria Toscana 31", date:"2026-12-04", time:"", desc:"Una delle voci più influenti del rap turco contemporaneo, unico appuntamento italiano.", link:"https://www.santeria.milano.it/eventi/"},
+  {name:"Catch Your Breath — Not Broken Enough Tour", type:"locale", venue:"Santeria Toscana 31", date:"2027-01-27", time:"", desc:"Primo concerto italiano della band americana, con Ocean Sleeper ed Elijah.", link:"https://www.santeria.milano.it/eventi/"}
 ];
 
 const STORAGE_KEY = "agenda-milano:events-v34";
@@ -1737,7 +1789,8 @@ document.getElementById('toolbar').addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
   if(!chip) return;
   const type = chip.getAttribute('data-type');
-  const allTypes = ["teatro","locale","cinema"];
+  const allTypes = ["teatro","locale","cinema"
+];
 
   if(type === "all"){
     activeTypes = new Set(allTypes);
@@ -1793,6 +1846,60 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
+
+// --- Banner installazione: rileva piattaforma e situazione "finestra ridotta" ---
+(function(){
+  const banner = document.getElementById('installBanner');
+  const textEl = document.getElementById('installText');
+  const actionBtn = document.getElementById('installAction');
+  const closeBtn = document.getElementById('installClose');
+  const ua = navigator.userAgent || "";
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  if (isStandalone) return; // già installata, niente banner
+
+  if (sessionStorage.getItem('installBannerClosed') === '1') return;
+
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (isAndroid) showBanner();
+  });
+
+  function showBanner(){
+    banner.classList.add('show');
+  }
+
+  if (isIOS){
+    textEl.innerHTML = "<strong>Installa l'app sul tuo iPhone</strong>Tocca l'icona di condivisione <b>⬆️</b> in basso, poi scegli <b>\"Aggiungi alla schermata Home\"</b>. Se non vedi questa opzione, tocca prima i puntini in alto e scegli <b>\"Apri in Safari\"</b>.";
+    showBanner();
+  } else if (isAndroid){
+    textEl.innerHTML = "<strong>Installa l'app sul tuo telefono</strong>Se il pulsante qui a fianco non funziona, tocca i tre puntini <b>⋮</b> in alto e cerca <b>\"Apri in Chrome\"</b>, poi riprova.";
+    // Se dopo 1.5s non è arrivato il prompt reale, mostriamo comunque il banner con le istruzioni
+    setTimeout(() => { if(!banner.classList.contains('show')) showBanner(); }, 1500);
+  } else {
+    return; // desktop: nessun banner
+  }
+
+  actionBtn.addEventListener('click', async () => {
+    if (deferredPrompt){
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      banner.classList.remove('show');
+    }
+  });
+  if (deferredPrompt || isAndroid) actionBtn.style.display = 'inline-block';
+  if (isIOS) actionBtn.style.display = 'none';
+
+  closeBtn.addEventListener('click', () => {
+    banner.classList.remove('show');
+    sessionStorage.setItem('installBannerClosed', '1');
+  });
+})();
 </script>
 </body>
 </html>
