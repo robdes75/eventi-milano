@@ -1713,7 +1713,7 @@ const SEED_EVENTS = [
   {name:"Diva — meglio all'Inferno sui tacchi che in Paradiso con le ballerine", type:"teatro", venue:"Teatro della Cooperativa", date:"2026-10-27", time:"", desc:"Ideato, scritto e diretto da Andrea Ibba Monni. Monologo tra stand-up, autobiografia e teatro di narrazione, con la drag queen Greta Sofia Pilloni. Fino all'8 novembre.", link:"https://www.riflettorisu.com/2026/09/17/milano-teatro-della-cooperativa-25-anni-di-attivita/"}
 ];
 
-const STORAGE_KEY = "agenda-milano:events-v34";
+const STORAGE_KEY = "agenda-milano:user-events-v1";
 let events = [];
 let activeTypes = new Set(["teatro","locale","cinema"]);
 let searchTerm = "";
@@ -1721,22 +1721,31 @@ const MONTHS = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio"
 const MONTHS_SHORT = ["GEN","FEB","MAR","APR","MAG","GIU","LUG","AGO","SET","OTT","NOV","DIC"];
 const DOW = ["DOM","LUN","MAR","MER","GIO","VEN","SAB"];
 
+// I dati ufficiali (SEED_EVENTS) arrivano sempre freschi dal file.
+// Solo gli eventi aggiunti manualmente dall'utente restano salvati sul dispositivo,
+// così un aggiornamento dell'agenda non viene mai "coperto" da una vecchia copia in cache.
 async function loadEvents(){
+  let userAdded = [];
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
-    events = raw ? JSON.parse(raw) : SEED_EVENTS.slice();
-    if(!raw){ localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_EVENTS)); }
+    userAdded = raw ? JSON.parse(raw) : [];
   }catch(e){
-    events = SEED_EVENTS.slice();
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(events)); }catch(e2){}
+    userAdded = [];
   }
+  events = SEED_EVENTS.slice().concat(userAdded);
   populateVenueList();
   renderCatalog();
   render();
 }
 
 async function persist(){
-  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(events)); }catch(e){}
+  // Salva solo gli eventi aggiunti dall'utente (quelli non presenti in SEED_EVENTS),
+  // distinguendoli tramite name+date+venue come chiave.
+  try{
+    const seedKeys = new Set(SEED_EVENTS.map(e => e.name+'|'+e.date+'|'+e.venue));
+    const userAdded = events.filter(e => !seedKeys.has(e.name+'|'+e.date+'|'+e.venue));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(userAdded));
+  }catch(e){}
 }
 
 function populateVenueList(){
